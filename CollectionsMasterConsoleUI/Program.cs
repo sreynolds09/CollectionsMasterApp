@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace CollectionsMasterConsoleUI
 {
@@ -12,16 +13,16 @@ namespace CollectionsMasterConsoleUI
             //Utlilize the method stubs at the bottom for the methods you must create ⬇⬇⬇
 
             #region Arrays
-            //TODO: Create an integer Array of size 50
+            //DONE - TODO: Create an integer Array of size 50
             var numbers = new int[50];
-            //TODO: Create a method to populate the number array with 50 random numbers that are between 0 and 50
+            //DONE -TODO: Create a method to populate the number array with 50 random numbers that are between 0 and 50
             Populater(numbers);
-            //TODO: Print the first number of the array
+            //DONE - TODO: Print the first number of the array
             Console.WriteLine(numbers[0]);
-            //TODO: Print the last number of the array            
+            //DONE - TODO: Print the last number of the array            
             Console.WriteLine(numbers[numbers.Length - 1]);
             Console.WriteLine("All Numbers Original");
-            //UNCOMMENT this method to print out your numbers from arrays or lists
+            //DONE - UNCOMMENT this method to print out your numbers from arrays or lists
             NumberPrinter(numbers);
             Console.WriteLine("-------------------");
 
@@ -30,15 +31,15 @@ namespace CollectionsMasterConsoleUI
             /*  1) First way, using a custom method => Hint: Array._____(); 
                 2) Second way, Create a custom method (scroll to bottom of page to find ⬇⬇⬇)
             */
-            Array.Reverse(numbers);
-            
             Console.WriteLine("All Numbers Reversed:");
-
+            Array.Reverse(numbers); //Built in
+            NumberPrinter(numbers);
             Console.WriteLine("---------REVERSE CUSTOM------------");
-
+            ReverseArray(numbers); //Custom
+            NumberPrinter(numbers);
             Console.WriteLine("-------------------");
 
-            //TODO: Create a method that will set numbers that are a multiple of 3 to zero then print to the console all numbers
+            //DONE - TODO: Create a method that will set numbers that are a multiple of 3 to zero then print to the console all numbers
             Console.WriteLine("Multiple of three = 0: ");
             ThreeKiller(numbers);
 
@@ -58,16 +59,16 @@ namespace CollectionsMasterConsoleUI
             Console.WriteLine("************Start Lists**************");
 
             /*   Set Up   */
-            //TODO: Create an integer List
+            //DONE - TODO: Create an integer List
             var numbersList = new List<int>();
 
-            //TODO: Print the capacity of the list to the console
+            //DONE -TODO: Print the capacity of the list to the console
             Console.WriteLine(numbersList.Capacity);
             
-            //TODO: Populate the List with 50 random numbers between 0 and 50 you will need a method for this            
+            //DONE - TODO: Populate the List with 50 random numbers between 0 and 50 you will need a method for this            
             Populater(numbersList);
 
-            //TODO: Print the new capacity
+            //DONE -TODO: Print the new capacity
             Console.WriteLine(numbersList.Capacity);
 
             Console.WriteLine("---------------------");
@@ -91,20 +92,20 @@ namespace CollectionsMasterConsoleUI
             Console.WriteLine("-------------------");
 
 
-            //TODO: Create a method that will remove all odd numbers from the list then print results
+            //DONE - TODO: Create a method that will remove all odd numbers from the list then print results
             Console.WriteLine("Evens Only!!");
             OddKiller(numbersList);
             
             Console.WriteLine("------------------");
 
-            //TODO: Sort the list then print results
+            //DONE - TODO: Sort the list then print results
             Console.WriteLine("Sorted Evens!!");
             numbersList.Sort();
             NumberPrinter(numbersList);
             
             Console.WriteLine("------------------");
 
-            //TODO: Convert the list to an array and store that into a variable
+            //DONE - TODO: Convert the list to an array and store that into a variable
             var listCopy = numbersList.ToArray();
                 
             //TODO: Clear the list
@@ -150,7 +151,7 @@ namespace CollectionsMasterConsoleUI
             private static void Populater(List<int> numberList)
             {
                 Random rng = new Random();
-                while (numberList.Count <= 50)
+                while (numberList.Count < 50)
                 {
                     numberList.Add(rng.Next(0, 51));
                 }
@@ -173,13 +174,14 @@ namespace CollectionsMasterConsoleUI
                 int end = array.Length - 1;
                 while (start < end)
                 {
-                    int temp = array[start];
-                    array[start] = array[end];
-                    array[end] = temp;
+                    (array[start], array[end]) = (array[end], array[start]);
                     start++;
                     end--;
+                    
                 }
+               
             }
+            
 
             /// <summary>
             /// Generic print method will iterate over any collection that implements IEnumerable<T>
